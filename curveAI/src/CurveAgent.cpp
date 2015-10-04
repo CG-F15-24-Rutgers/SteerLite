@@ -14,7 +14,7 @@
 #include <random>
 
 /// @file CurveAgent.cpp
-/// @brief Implements the CurveAgent class.
+/// @brief Implements the CurveAgent class.E:\CodingPreparation\C++\Find2Numbersequalstospecifictarget.cpp\Find2Numbersequalstospecifictarget.cpp
 
 #define MAX_FORCE_MAGNITUDE 3.0f
 #define MAX_SPEED 1.3f
@@ -26,6 +26,7 @@ CurveAgent::CurveAgent()
 
 	// Set curve type here
 	curve.setType(Util::hermiteCurve);
+	//curve.setType(Util::catmullCurve);
 }
 
 CurveAgent::~CurveAgent()
@@ -101,7 +102,7 @@ void CurveAgent::reset(const SteerLib::AgentInitialConditions & initialCondition
 
 	// Add control points to curve
 	std::vector<Util::CurvePoint> controlPoints;
-	Util::Vector startTangent(0.f, 0.f, 0.f);
+	Util::Vector startTangent(0.0f, 0.0f, 0.0f);
 	controlPoints.push_back(Util::CurvePoint(__position, startTangent, 0.f));
 	for (int i = 0; i < _goalQueue.size(); i++)
 	{

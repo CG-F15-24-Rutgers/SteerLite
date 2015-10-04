@@ -31,7 +31,8 @@ Camera::Camera()
 	m_pois.clear();
 
 	// Set curve type here
-	curve.setType(Util::catmullCurve);
+	//curve.setType(Util::catmullCurve);
+	curve.setType(Util::hermiteCurve);
 
 	// Default to no animation (simulation engine can override this)
 	animateCamera = false;
@@ -130,10 +131,9 @@ void Camera::animate(float timeStamp, float dt, unsigned int frameNumber)
 {
 	if (!animateCamera)
 		return;
-
 	Util::Point newPosition;
 	if (!curve.calculatePoint(newPosition, timeStamp + dt))
-	{
+	{	
 		return;
 	}
 	else
