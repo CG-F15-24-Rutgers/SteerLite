@@ -79,6 +79,13 @@ void Curve::drawCurve(Color curveColor, float curveThickness, int window)
 // Sort controlPoints vector in ascending order: min-first
 void Curve::sortControlPoints()
 {
+	/*std::unordered_set<CurvePoint> s;
+
+	for (int i = 0; i < controlPoints.size(); ++i)
+	s.insert(controlPoints[i]);
+	controlPoints.assign(s.begin(), s.end());
+	std::sort(controlPoints.begin() + 1, controlPoints.end(), &compareTime);
+	*/
 	std::sort(controlPoints.begin() + 1, controlPoints.end(), &compareTime);
 	controlPoints.erase(std::unique(controlPoints.begin(), controlPoints.end(), &IsEqualTime), controlPoints.end());
 	return;
@@ -127,11 +134,14 @@ bool Curve::checkRobust()
 bool Curve::findTimeInterval(unsigned int& nextPoint, float time)
 {
 	//std::cout << "5" << std::endl;
-	static int index = 0;
-	if (index < controlPoints.size() - 1)
+	int index =  0;
+	for (int i = 0; i < controlPoints.size() - 1; )
 	{
-		if (time > controlPoints[index + 1].time)
+		if (time > controlPoints[i + 1].time) {
+			++i;
 			++index;
+			continue;
+		}
 		nextPoint = index;
 		return true;
 	}
